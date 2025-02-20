@@ -1,4 +1,4 @@
-
+// src/context/FlightContext.js
 import React, { createContext, useState, useContext } from "react";
 import { getFlights } from "../services/flightApi";
 
@@ -15,7 +15,7 @@ export const FlightProvider = ({ children }) => {
     setLoading(true);
     try {
       const data = await getFlights(params);
-      setFlights(data.Quotes || []);
+      setFlights(data.data || []);
     } catch (err) {
       setError("Failed to fetch flights");
     } finally {

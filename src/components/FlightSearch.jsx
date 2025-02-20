@@ -1,18 +1,17 @@
+
 import React, { useState } from "react";
 import { useFlightContext } from "../context/FlightContext";
 
 const FlightSearch = () => {
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [date, setDate] = useState("");
+  const [airline, setAirline] = useState("");
   const { searchFlights, loading } = useFlightContext();
 
   const handleSearch = () => {
-    if (!from || !to || !date) {
-      alert("Please fill in all fields!");
+    if (!airline) {
+      alert("Please enter an airline name!");
       return;
     }
-    searchFlights({ origin: from, destination: to, date });
+    searchFlights({ airline_name: airline });
   };
 
   return (
@@ -21,23 +20,10 @@ const FlightSearch = () => {
       <div className="flex space-x-3">
         <input
           type="text"
-          placeholder="From (e.g. JFK)"
-          value={from}
-          onChange={(e) => setFrom(e.target.value)}
-          className="p-2 border rounded w-1/3"
-        />
-        <input
-          type="text"
-          placeholder="To (e.g. LAX)"
-          value={to}
-          onChange={(e) => setTo(e.target.value)}
-          className="p-2 border rounded w-1/3"
-        />
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          className="p-2 border rounded w-1/3"
+          placeholder="Enter Airline (e.g. Delta, Emirates)"
+          value={airline}
+          onChange={(e) => setAirline(e.target.value)}
+          className="p-2 border rounded w-full"
         />
       </div>
       <button
